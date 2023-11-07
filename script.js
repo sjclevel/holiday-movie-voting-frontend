@@ -22,7 +22,7 @@ function updateVoteButtonsState() {
 
 async function fetchMovies() {
     try {
-        const response = await fetch('https://mybackenddomain.com/movies');
+        const response = await fetch('https://holiday-movie-voting-backend.vercel.app/movies');
         const movies = await response.json();
         movies.sort((a, b) => b.votes - a.votes);
         movieList.innerHTML = '';
@@ -42,7 +42,7 @@ function addMovieToList(movie) {
     voteButton.classList.add('vote-button');
     voteButton.addEventListener('click', async () => {
         try {
-            await fetch(`https://mybackenddomain.com/vote/${movie._id}`, { method: 'POST' });
+            await fetch(`https://holiday-movie-voting-backend.vercel.app/vote/${movie._id}`, { method: 'POST' });
             incrementVoteCount();
             movie.votes++; // Update the local vote count
             listItem.textContent = `${movie.name} (${movie.votes} votes) `; // Update the text
@@ -65,7 +65,7 @@ movieForm.addEventListener('submit', async (e) => {
         return;
     }
     try {
-        const response = await fetch('https://mybackenddomain.com/add-movie', {
+        const response = await fetch('https://holiday-movie-voting-backend.vercel.app/add-movie', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: movieName })
